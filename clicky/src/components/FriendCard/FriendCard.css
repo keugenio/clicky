@@ -36,6 +36,8 @@
   width: 100%;
   color: green;
 }
-
+.non-viewable{
+  display: none
+}
 
 

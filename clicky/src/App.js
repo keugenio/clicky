@@ -37,11 +37,10 @@ class App extends Component {
      // refer to the current array of friends as a "nonRamdom" array, 
      const nonRandomFriends = this.state.friends;
      
-     // fidnd index of friend to be disabled, set friend to disabled
+     // find index of friend to be disabled, set friend to disabled
      const disabledIndex =  nonRandomFriends.findIndex(x => x.id===id);
      nonRandomFriends[disabledIndex].status='disabled';
-     nonRandomFriends[disabledIndex].font='check';
-     this.setState({font:'check'});
+     nonRandomFriends[disabledIndex].font='fa fa-check fa-2x';
     this.randomizeFriends(nonRandomFriends);
   }
 
@@ -80,19 +79,27 @@ class App extends Component {
     if (myFriends[targetIndex].status==="active" && this.state.gameStatus !== "gameOver"){
       this.setState({score:this.state.score+1});
       this.setDisabledCreateRandomOrder(id);
-    } else  
+    } else {
+      // set the font of user to show incorrect choice
+      // find index of inccorect friend, copy friends into edittable array to edit it 
+      // and write back to friend state then end the game
+      const disableIncorrectdIndex =  this.state.friends.findIndex(x => x.id===id);
+      let editArray = this.state.friends;
+      editArray[disableIncorrectdIndex].font = 'fa  fa-user-times fa-2x text-danger';
+      this.setState({friends:editArray});
       this.endGame();
+    }
 };
 
   handleResetGame = () => {
     // reset all friends to active
       this.state.friends.forEach(element => {
-        element.status = 'active'
+        element.status = 'active';
+        element.font = '';
       });
     // reset score
     this.setState({score:0});
     
-    console.log("start: " + this.state.score);
     //randomize friends
     this.randomizeFriends(this.state.friends);
 
@@ -104,8 +111,10 @@ class App extends Component {
   render() {
     // if the game is over, set the status of friend card
     let opacity = 0;
+    let viewable = 'non-viewable'
     if (this.state.gameStatus === "gameOver"){
       opacity = .5;
+      viewable = 'viewable';
     }
     let display = "block"
     if (this.state.resetButtonDisplay===false){
@@ -134,6 +143,7 @@ class App extends Component {
                     gameStatus = {this.state.gameStatus}
                     status = {friend.status}
                     font = {friend.font}
+                    viewable = {viewable}
                   />
                 ))
                }
