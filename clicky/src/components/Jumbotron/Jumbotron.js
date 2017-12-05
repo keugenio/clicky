@@ -11,7 +11,7 @@ const Jumbotron = props =>
           <h4>{props.instructions}</h4>
     </Row>
     <Row className="text-right">
-            <h4>score: {props.score} out of {props.total}</h4>
+            <h4>score: {props.score} out of {props.friendCount}</h4>
     </Row>
   </div>;
 
