@@ -1,18 +1,17 @@
 import React from "react";
 import "./FriendCard.css";
 
-const FriendCard = props => (
-  // remember to account for 0 index of friends array by passing
-  <div className={`card ${props.gameStatus}`} onClick={() => props.setStateFriend(props.id)}>
-    <div className="img-container">
-      <img alt={props.name} src={props.image} />
-    </div>
-    <div className="content d-flex align-content-center">
-      <p>
-        {props.name}
+const FriendCard = ({id, opacity, name, image, status, onClick}) => (
+  // style card if the game is over by darkening the opacity to the linear gradient of the background image
+  <div  className={`card d-flex align-content-end h-100}`}
+        onClick={() => onClick(id)} 
+        style={{ backgroundImage:
+          `linear-gradient(rgba(0, 0, 0, ${opacity}), rgba(0, 0, 0, ${opacity})), 
+          url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'100% 100%'}}
+        >
+      <p className='name'>
+        {name} {status}
       </p>
-      <div className="ml-auto">{props.status}</div>
-    </div>
   </div>
 );
 
