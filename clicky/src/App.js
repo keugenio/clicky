@@ -5,38 +5,28 @@ import Jumbotron from "./components/Jumbotron";
 import Row from "./components/Row";
 import Col from "./components/Col";
 import ResetButton from "./components/ResetButton";
-// import friends from "./friends.json";
+import friends from "./friends.json";
 import "./App.css";
-
-const axios = require("axios");
 
 class App extends Component {
   // Setting this.state.friends to the friends json array
   state = {
-    friends: [],
+    friends: friends,
     score:0,
-    friendCount: 12,
+    total: friends.length,
     gameStatus: 'active',
     resetButtonDisplay:false,
   };
 
   // before anything renders, randomize the friends so each game starts with them resorted
   componentDidMount(){
-      axios
-      .get("https://randomuser.me/api/", { params:{results: this.state.friendCount }})
-        .then(
-          // res => console.log(res.data.results);
-          res => this.setState({friends:res.data.results})
-        )
-        .catch(err => console.log(err));
-
-      console.log(this.state.friends);
+    this.randomizeFriends(friends);
   }
 
   // after the score has been updated, check to see if game has been won which happens 
-  // when score = friendCount, the possible number of friends
+  // when score = total possible friends
   componentDidUpdate(){
-    if (this.state.score === this.state.friendCount && this.state.gameStatus === 'active'){
+    if (this.state.score === this.state.total && this.state.gameStatus === 'active'){
       alert("You won!! All friends guessed only once!");
       this.endGame();
     }
@@ -58,7 +48,7 @@ class App extends Component {
   randomizeFriends = (nonRandomFriends) =>{
     // create a new random array of friends by randomly splicing the nonRandom array and pushing into new random array
     const randomFriends = [];
-    for (let i = this.state.friendCount; i > 0; i--) {
+    for (let i = this.state.total; i > 0; i--) {
       let index = Math.floor(Math.random()*i);
       randomFriends.push(nonRandomFriends[index]);
       nonRandomFriends.splice(index, 1);;
@@ -86,7 +76,7 @@ class App extends Component {
     
     // find index of friend to be disabled, if not disabled, update score and set friend to disabled
     const targetIndex =  myFriends.findIndex(x => x.id===id);
-    if (myFriends[targetIndex].status === "active" && this.state.gameStatus !== "gameOver"){
+    if (myFriends[targetIndex].status==="active" && this.state.gameStatus !== "gameOver"){
       this.setState({score:this.state.score+1});
       this.setDisabledCreateRandomOrder(id);
     } else {
@@ -137,7 +127,7 @@ class App extends Component {
           title="Clicky with Friends"
           instructions="click on a friend once to score a point. Click any friend twice and game ends."
           score={this.state.score}
-          friendCount={this.state.friendCount} />       
+          total={this.state.total} />       
         <Wrapper>
           <Row>
             <Col size="lg-12">
@@ -145,10 +135,10 @@ class App extends Component {
                   this.state.friends.map(friend => (
                   <FriendCard
                     onClick={this.handleSetFriendState}
-                    id={friend.id.value}
-                    key={friend.id.value}
-                    name= {friend.name.first}
-                    image={friend.picture.large}
+                    id={friend.id}
+                    key={friend.id}
+                    name={friend.name}
+                    image={friend.image}
                     opacity={opacity}
                     gameStatus = {this.state.gameStatus}
                     status = {friend.status}
