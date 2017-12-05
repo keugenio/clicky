@@ -3,72 +3,84 @@
     "id": 1,
     "name": "SpongeBob",
     "image": "https://randomuser.me/api/portraits/women/12.jpg",
-    "status": "active"
+    "status": "active",
+    "font": ""
   },
   {
     "id": 2,
     "name": "Mr. Krabs",
     "image": "https://randomuser.me/api/portraits/women/11.jpg",
-    "status": "active"
+    "status": "active",
+    "font": ""
   },
   {
     "id": 3,
     "name": "Squidward",
     "image": "https://randomuser.me/api/portraits/women/10.jpg",
-    "status": "active"
+    "status": "active",
+    "font": ""
   },
   {
     "id": 4,
     "name": "Dexter",
     "image": "https://randomuser.me/api/portraits/women/9.jpg",
-    "status": "active"
+    "status": "active",
+    "font": ""
   },
   {
     "id": 5,
     "name": "Courage",
     "image": "https://randomuser.me/api/portraits/men/12.jpg",
-    "status": "active"
+    "status": "active",
+    "font": ""
   },
   {
     "id": 6,
     "name": "Doug Funnie",
     "image": "https://randomuser.me/api/portraits/men/11.jpg",
-    "status": "active"
+    "status": "active",
+    "font": ""
   },
   {
     "id": 7,
     "name": "Bugs Bunny",
     "image": "https://randomuser.me/api/portraits/men/10.jpg",
-    "status": "active"
+    "status": "active",
+    "font": ""
   },
   {
     "id": 8,
     "name": "Johnny Bravo",
     "image": "https://randomuser.me/api/portraits/men/9.jpg",
-    "status": "active"
+    "status": "active",
+    "font": ""
   },
   {
     "id": 9,
     "name": "Tommy Pickles",
     "image": "https://randomuser.me/api/portraits/men/8.jpg",
-    "status": "active"
+    "status": "active",
+    "font": ""
   },
   {
     "id": 10,
     "name": "Rocko",
     "image": "https://randomuser.me/api/portraits/women/8.jpg",
-    "status": "active"
+    "status": "active",
+    "font": ""
   },
   {
     "id": 11,
     "name": "Captain Planet",
     "image": "https://randomuser.me/api/portraits/women/7.jpg",
-    "status": "active"
+    "status": "active",
+    "font": ""
   },
   {
     "id": 12,
     "name": "Ickis",
     "image": "https://randomuser.me/api/portraits/men/7.jpg",
-    "status": "active"
+    "status": "active",
+    "font": ""
   }
 ]

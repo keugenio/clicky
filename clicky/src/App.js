@@ -15,7 +15,7 @@ class App extends Component {
     score:0,
     total: friends.length,
     gameStatus: 'active',
-    resetButtonDisplay:false
+    resetButtonDisplay:false,
   };
 
   // before anything renders, randomize the friends so each game starts with them resorted
@@ -39,7 +39,9 @@ class App extends Component {
      
      // fidnd index of friend to be disabled, set friend to disabled
      const disabledIndex =  nonRandomFriends.findIndex(x => x.id===id);
-     nonRandomFriends[disabledIndex].status="disabled";
+     nonRandomFriends[disabledIndex].status='disabled';
+     nonRandomFriends[disabledIndex].font='check';
+     this.setState({font:'check'});
     this.randomizeFriends(nonRandomFriends);
   }
 
@@ -131,6 +133,7 @@ class App extends Component {
                     opacity={opacity}
                     gameStatus = {this.state.gameStatus}
                     status = {friend.status}
+                    font = {friend.font}
                   />
                 ))
                }

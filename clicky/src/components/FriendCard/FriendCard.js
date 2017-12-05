@@ -1,17 +1,24 @@
 import React from "react";
 import "./FriendCard.css";
 
-const FriendCard = ({id, opacity, name, image, status, onClick}) => (
+const FriendCard = ({id, opacity, name, image, status, onClick, font}) => (
   // style card if the game is over by darkening the opacity to the linear gradient of the background image
-  <div  className={`card d-flex align-content-end h-100}`}
+  <div className={'card d-flex}'}
         onClick={() => onClick(id)} 
         style={{ backgroundImage:
           `linear-gradient(rgba(0, 0, 0, ${opacity}), rgba(0, 0, 0, ${opacity})), 
-          url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'100% 100%'}}
+          url(${image})`, 
+          backgroundRepeat: 'no-repeat', 
+          backgroundSize:'90% 90%', 
+          backgroundPosition: 'calc(100% - 10px) calc(100% - 5px)'}}
         >
-      <p className='name'>
-        {name} {status}
+    <div className='card-body'/>
+    <div className='card-footer text-center bg-white p-2 d-flex flex-row justify-content-center'>
+      <p className='name p-0 my-0'>{name}</p>
+      <p className='viewable'>
+      <i class='fa fa-${font}' aria-hidden="true"></i>
       </p>
+    </div>
   </div>
 );
 

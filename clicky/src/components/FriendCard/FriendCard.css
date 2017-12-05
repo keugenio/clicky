@@ -24,12 +24,17 @@
 }
 
 .name{
-  color: rgb(255, 255, 0);
-  text-shadow: 2px 2px rgba(2, 24, 43, 0.746);
-  position:absolute;
-  width:100%;
-  margin: 0;
-  bottom: 0;
+  color: rgb(0, 0, 255);
+  font-family: 'Nothing You Could Do', cursive;
+}
+.card-footer{
+  border: none;
+}
+.viewable{
+  position: absolute;
+  text-align: right;
+  width: 100%;
+  color: green;
 }
 
 
