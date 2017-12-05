@@ -1,0 +1,32 @@
+.card {
+  background: #fff;
+  border-radius: 2px;
+  height: 200px;
+  width: 200px;
+  box-shadow: 0 3px 6px #999, 0 3px 6px #999;
+  text-align: center;
+  cursor: pointer;  
+  margin: 5px;
+}
+
+.card > .img-container {
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+  background:#6CADDC;
+}
+.card > .img-container > img {
+  width: 100%;
+}
+
+.card > .content {
+  font-size: 15px;
+  height: 20px;  
+}
+
+.card > .gameOver {
+  cursor: none;
+  opacity: .6;
+}
+
+
