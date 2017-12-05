@@ -17,7 +17,12 @@
 .card > .img-container > img {
   width: 100%;
 }
-
+.active {
+  cursor: pointer;
+}
+.gameOver {
+  cursor: default;
+}
 .card > .content {
   font-size: 15px;
   height: 20px;  

@@ -1,10 +1,10 @@
 import React from "react";
 import "./FriendCard.css";
 
-const FriendCard = ({id, opacity, name, image, status, onClick, font, viewable}) => (
+const FriendCard = ({id, opacity, name, image, status, onClick, font, viewable, gameStatus}) => (
   // style card if the game is over by darkening the opacity to the linear gradient of the background image
-  <div className={'card d-flex}'}
-        onClick={() => onClick(id)} 
+  <div className={`card d-flex ${gameStatus}`}
+        onClick={() => onClick ? onClick(id): ""} 
         style={{ backgroundImage:
           `linear-gradient(rgba(0, 0, 0, ${opacity}), rgba(0, 0, 0, ${opacity})), 
           url(${image})`, 

@@ -5,33 +5,56 @@ import Jumbotron from "./components/Jumbotron";
 import Row from "./components/Row";
 import Col from "./components/Col";
 import ResetButton from "./components/ResetButton";
-import friends from "./friends.json";
+// import friends from "./friends.json";
 import "./App.css";
+const axios = require("axios");
 
 class App extends Component {
   // Setting this.state.friends to the friends json array
   state = {
-    friends: friends,
+    friends:[],
     score:0,
-    total: friends.length,
-    gameStatus: 'active',
+    friendCount: 12,
+    gameStatus: 'begin',
     resetButtonDisplay:false,
   };
 
-  // before anything renders, randomize the friends so each game starts with them resorted
-  componentDidMount(){
-    this.randomizeFriends(friends);
+  componentWillMount(){
+    console.log("will mount can't do anything here.");
   }
-
+  // before anything renders, download friends from the radomuser.api
+  componentDidMount(){
+    axios
+    .get("https://randomuser.me/api/", {params:{results: this.state.friendCount}})
+      .then(
+        // res => console.log(res.data.results);
+        res => this.setState({friends:res.data.results})
+      )
+      .catch(err => console.log(err));   
+      console.log("did mount ajax loaded");
+  }
+  
   // after the score has been updated, check to see if game has been won which happens 
   // when score = total possible friends
   componentDidUpdate(){
-    if (this.state.score === this.state.total && this.state.gameStatus === 'active'){
+    console.log("did update, game checked if player won")
+    if (this.state.score === this.state.friendCount && this.state.gameStatus === 'active'){
       alert("You won!! All friends guessed only once!");
       this.endGame();
     }
   }
-
+  componentWillUpdate(){
+      console.log("will update");
+      if (this.state.gameStatus === 'begin'){         
+        this.state.friends.forEach(element => {
+          element.id = element.login.md5;
+          element.status = 'active';
+          element.font = '';
+        });
+        console.log(this.state.friends);      
+        this.setState({gameStatus:'active'});
+      } 
+  }
   // function sets the state of the friend chosen to be "disabled" and randomizes the original friends array
   setDisabledCreateRandomOrder = id => {
      // refer to the current array of friends as a "nonRamdom" array, 
@@ -48,7 +71,7 @@ class App extends Component {
   randomizeFriends = (nonRandomFriends) =>{
     // create a new random array of friends by randomly splicing the nonRandom array and pushing into new random array
     const randomFriends = [];
-    for (let i = this.state.total; i > 0; i--) {
+    for (let i = this.state.friendCount; i > 0; i--) {
       let index = Math.floor(Math.random()*i);
       randomFriends.push(nonRandomFriends[index]);
       nonRandomFriends.splice(index, 1);;
@@ -109,36 +132,40 @@ class App extends Component {
   // Map over this.state.friends and render a FriendCard component for each friend object
   
   render() {
+    console.log("render");
     // if the game is over, set the status of friend card
     let opacity = 0;
     let viewable = 'non-viewable'
+    let onClick = this.handleSetFriendState
     if (this.state.gameStatus === "gameOver"){
       opacity = .5;
       viewable = 'viewable';
+      onClick = '';
     }
+
     let display = "block"
     if (this.state.resetButtonDisplay===false){
       display = "none";
     }
-    
+
     return (
       <div>
         <Jumbotron
           title="Clicky with Friends"
           instructions="click on a friend once to score a point. Click any friend twice and game ends."
           score={this.state.score}
-          total={this.state.total} />       
+          friendCount={this.state.friendCount} />       
         <Wrapper>
           <Row>
             <Col size="lg-12">
                 {
                   this.state.friends.map(friend => (
                   <FriendCard
-                    onClick={this.handleSetFriendState}
-                    id={friend.id}
-                    key={friend.id}
-                    name={friend.name}
-                    image={friend.image}
+                    onClick={onClick}
+                    id={friend.login.md5}
+                    key={friend.login.md5}
+                    name= {friend.name.first}
+                    image={friend.picture.large}
                     opacity={opacity}
                     gameStatus = {this.state.gameStatus}
                     status = {friend.status}
